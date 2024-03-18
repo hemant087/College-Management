@@ -2,8 +2,8 @@
 
 <div class="header">
     <div class="header-left">
-        <a href="{% static 'index.html' %}" class="logo">
-            <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
+        <a href="#" class="logo">
+            <img src="{% static 'assets/img/pce.png' %}" alt="Logo">
         </a>
         <a href="index.html" class="logo logo-small">
             <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
@@ -115,15 +115,21 @@
             <div class="dropdown-menu">
                 <div class="user-header">
                     <div class="avatar avatar-sm">
-                        <img src="{% static 'assets/img/profiles/avatar-01.jpg" alt="User Image' %}"
+                        <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="User Image"
                             class="avatar-img rounded-circle">
                     </div>
                     <div class="user-text">
-                        <h6>Ryan Taylor</h6>
-                        <p class="text-muted mb-0">Administrator</p>
+                        <h6>{{user.first_name}}&nbsp;{{user.last_name}} </h6>
+                        {% if user.user_type == '1' %}
+                        <p class="text-muted mb-0">Head of Department</p>
+                        {% elif user.user_type == '2' %}
+                        <p class="text-muted mb-0">Academic Staff</p>
+                        {% elif user.user_type == '3' %}
+                        <p class="text-muted mb-0">Students</p>
+                        {% endif %}
                     </div>
                 </div>
-                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href= {% url 'profile' %} >My Profile Update</a>
                 <a class="dropdown-item" href="inbox.html">Inbox</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
 

@@ -13,6 +13,10 @@ urlpatterns = [
     path('doLogin', views.doLogin, name='doLogin'),
     path('doLogout', views.doLogout, name='logout'),
 
+    # profile update
+    path('Profile',views.PROFILE,name = 'profile'),
+    path('Profile/update',views.PROFILE_UPDATE, name = 'profile_update'),
+
     # HOD penal
     path('Hod/Home', hod_views.HOME, name='hod_home'),
 

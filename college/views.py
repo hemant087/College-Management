@@ -3,6 +3,7 @@ from app.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from app.models import CustomUser
 
 
 def BASE(request):
@@ -38,3 +39,14 @@ def doLogin(request):
 def doLogout(request):
     logout(request)
     return redirect('login')
+
+
+def PROFILE(request):
+    user = CustomUser.objects.get(id = request.user.id)
+    context = {
+        'user':user
+    }
+    return render(request, 'profile.html')
+
+def PROFILE_UPDATE(request):
+    return render(request, "profile.html")

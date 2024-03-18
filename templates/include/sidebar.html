@@ -7,13 +7,16 @@
                     <span>Main Menu</span>
                 </li>
                 <li class="submenu active">
-                    <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span
+                    <li>
+                        <a href="#"><i class="fas fa-holly-berry"></i> <span>Dashboard</span></a>
+                    </li>
+                    {% comment %} <a href="#"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="index.html" class="active">Admin Dashboard</a></li>
                         <li><a href="teacher-dashboard.html">Teacher Dashboard</a></li>
                         <li><a href="student-dashboard.html">Student Dashboard</a></li>
-                    </ul>
+                    </ul> {% endcomment %}
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fas fa-user-graduate"></i> <span> Students</span> <span
@@ -26,13 +29,13 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teachers</span> <span
+                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Staff</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="teachers.html">Teacher List</a></li>
-                        <li><a href="teacher-details.html">Teacher View</a></li>
-                        <li><a href="add-teacher.html">Teacher Add</a></li>
-                        <li><a href="edit-teacher.html">Teacher Edit</a></li>
+                        <li><a href="teachers.html">Staff List</a></li>
+                        <li><a href="teacher-details.html">Staff View</a></li>
+                        <li><a href="add-teacher.html">Staff Add</a></li>
+                        <li><a href="edit-teacher.html">Staff Edit</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
@@ -57,6 +60,18 @@
                     <span>Management</span>
                 </li>
                 <li class="submenu">
+                    <a href="#"><i class="fas fa-columns"></i> <span> Forms </span> <span
+                        class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
+                            <li><a href="form-input-groups.html">Input Groups </a></li>
+                            <li><a href="form-horizontal.html">Horizontal Form </a></li>
+                            <li><a href="form-vertical.html"> Vertical Form </a></li>
+                            <li><a href="form-mask.html"> Form Mask </a></li>
+                            <li><a href="form-validation.html"> Form Validation </a></li>
+                        </ul>
+                    </li>
+                    {% comment %} <li class="submenu">
                     <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Accounts</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
@@ -66,7 +81,7 @@
                         <li><a href="add-fees-collection.html">Add Fees</a></li>
                         <li><a href="add-expenses.html">Add Expenses</a></li>
                         <li><a href="add-salary.html">Add Salary</a></li>
-                    </ul>
+                    </ul> {% endcomment %}
                 </li>
                 <li>
                     <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
@@ -86,12 +101,15 @@
                 <li>
                     <a href="library.html"><i class="fas fa-book"></i> <span>Library</span></a>
                 </li>
-                <li class="menu-title">
+                <li>
+                    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                </li>
+                {% comment %} <li class="menu-title">
                     <span>Pages</span>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fas fa-shield-alt"></i> <span> Authentication </span> <span
-                            class="menu-arrow"></span></a>
+                        class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="login.html">Login</a></li>
                         <li><a href="register.html">Register</a></li>
@@ -111,26 +129,11 @@
                 <li>
                     <a href="hostel.html"><i class="fas fa-hotel"></i> <span>Hostel</span></a>
                 </li>
-                <li>
-                    <a href="transport.html"><i class="fas fa-bus"></i> <span>Transport</span></a>
-                </li>
                 <li class="menu-title">
                     <span>UI Interface</span>
                 </li>
                 <li>
                     <a href="components.html"><i class="fas fa-vector-square"></i> <span>Components</span></a>
-                </li>
-                <li class="submenu">
-                    <a href="#"><i class="fas fa-columns"></i> <span> Forms </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
-                        <li><a href="form-input-groups.html">Input Groups </a></li>
-                        <li><a href="form-horizontal.html">Horizontal Form </a></li>
-                        <li><a href="form-vertical.html"> Vertical Form </a></li>
-                        <li><a href="form-mask.html"> Form Mask </a></li>
-                        <li><a href="form-validation.html"> Form Validation </a></li>
-                    </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span
@@ -162,9 +165,9 @@
                         </li>
                         <li>
                             <a href="javascript:void(0);"> <span>Level 1</span></a>
-                        </li>
+                        </li> 
                     </ul>
-                </li>
+                </li> {% endcomment %}
             </ul>
         </div>
     </div>
