@@ -14,11 +14,12 @@ urlpatterns = [
     path('doLogout', views.doLogout, name='logout'),
 
     # profile update
-    path('Profile',views.PROFILE,name = 'profile'),
-    path('Profile/update',views.PROFILE_UPDATE, name = 'profile_update'),
+    path('Profile', views.PROFILE, name='profile'),
+    path('Profile/update', views.PROFILE_UPDATE, name='profile_update'),
 
     # HOD penal
     path('Hod/Home', hod_views.HOME, name='hod_home'),
+    path('Hod/Student/Add', hod_views.ADD_STUDENT, name='add_student'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

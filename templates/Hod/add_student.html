@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content container-fluid">
+   <div class="page-header">
+      <div class="row align-items-center">
+         <div class="col">
+            <h3 class="page-title">Add Students</h3>
+            <ul class="breadcrumb">
+               <li class="breadcrumb-item"><a href="students.html">Students</a></li>
+               <li class="breadcrumb-item active">Add Students</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="card">
+            <div class="card-body">
+               <form>
+                  <div class="row">
+                     <div class="col-12">
+                        <h5 class="form-title"><span>Student Information</span></h5>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>First Name</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Last Name</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Email Address</label>
+                           <input type="email" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Mobile Number</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Registration No.</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Roll No.</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group" >
+                           <label>Department</label>
+                           <select class="form-control">
+                              <option>Select Department</option>
+                              <option>ECE</option>
+                              <option>EE</option>
+                              <option>CSE</option>
+                              <option>CSE and Ai</option>
+                              <option>Civil</option>
+                              <option>ME</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Semester</label>
+                           <select class="form-control">
+                              <option>Select Semester</option>
+                              <option>1st Sem</option>
+                              <option>2nd Sem</option>
+                              <option>3rd Sem</option>
+                              <option>4th Sem</option>
+                              <option>5th Sem</option>
+                              <option>6th Sem</option>
+                              <option>7th Sem</option>
+                              <option>8th Sem</option>
+                           </select>
+                        </div>
+                     </div>
+                     {% comment %} <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Session</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div> {% endcomment %}
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Gender</label>
+                           <select class="form-control">
+                              <option>Select Gender</option>
+                              <option>Female</option>
+                              <option>Male</option>
+                              <option>Others</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Date of Birth</label>
+                           <div>
+                              <input type="date" class="form-control">
+                           </div>
+                        </div>
+                     </div>
+                     {% comment %} <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Admission Number</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div> {% endcomment %}
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Student Image</label>
+                           <input type="file" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12">
+                        <h5 class="form-title"><span>Parent Information</span></h5>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Father's Name</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Father's Occupation</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Father's Mobile</label>
+                           <input type="text" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Father's Email</label>
+                           <input type="email" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Present Address</label>
+                           <textarea class="form-control"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Permanent Address</label>
+                           <textarea class="form-control"></textarea>
+                        </div>
+                     </div>
+                     <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Add Student</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}

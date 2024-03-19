@@ -41,12 +41,37 @@ def doLogout(request):
     return redirect('login')
 
 
+@login_required(login_url='/')
 def PROFILE(request):
-    user = CustomUser.objects.get(id = request.user.id)
+    user = CustomUser.objects.get(id=request.user.id)
     context = {
-        'user':user
+        'user': user
     }
     return render(request, 'profile.html')
 
+
+@login_required(login_url='/')
 def PROFILE_UPDATE(request):
+    if request.method == "POST":
+        profile_pic = request.FILES.get('profile_pic')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        # email = request.POST.get('email')
+        # username = request.POST.get('username')
+        password = request.POST.get('password')
+        # print(profile_pic,first_name,last_name)
+        try:
+            customUser = CustomUser.objects.get(id=request.user.id)
+            customUser.first_name = first_name
+            customUser.last_name = last_name
+
+            if password != 'None' and password != "":
+                customUser.set_password(password)
+            if password != 'None' and password != "":
+                customUser.profile_pic = profile_pic
+            customUser.save()
+            messages.success(request, "Your profile Updated Successfully ! ")
+            return redirect('profile')
+        except:
+            messages.error(request, 'Failed to Update your Profile')
     return render(request, "profile.html")
