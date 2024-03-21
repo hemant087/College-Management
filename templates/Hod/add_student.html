@@ -16,91 +16,120 @@
       <div class="col-sm-12">
          <div class="card">
             <div class="card-body">
-               <form>
+               <form method='POST' action="{% url 'add_student' %}" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                  <div class="col-12"> 
+                     <h5 class="form-title"><span>Add Student</span></h5>
+                  </div>
+
+                  {% include 'include/message.html' %}
+                  {% comment %} {% if messages %}
+                  {% for message in messages %}
+                  {% if message.tags == 'error' %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                     <strong>Hey There!</strong> {{message}}
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                  {% if messages %}
+                  {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                     <strong>Hey There!</strong> {{message}}
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}  {% endcomment %}
                   <div class="row">
                      <div class="col-12">
                         <h5 class="form-title"><span>Student Information</span></h5>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
+                           <label>Username</label>
+                           <input type="text" class="form-control" name='username'>
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                           <label>Profile Picture</label>
+                           <input type="file" class="form-control" name='profile_pic'>
+                        </div>
+                     </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">
                            <label>First Name</label>
-                           <input type="text" class="form-control">
+                           <input type="text" class="form-control"name='first_name'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Last Name</label>
-                           <input type="text" class="form-control">
+                           <input type="text" class="form-control" name='last_name'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Email Address</label>
-                           <input type="email" class="form-control">
+                           <input type="email" class="form-control" name='email'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Mobile Number</label>
-                           <input type="text" class="form-control">
+                           <input type="Number" class="form-control" name='mobile_number'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Registration No.</label>
-                           <input type="text" class="form-control">
+                           <input type="Number" class="form-control"name='registration'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Roll No.</label>
-                           <input type="text" class="form-control">
+                           <input type="text" class="form-control"name='roll'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
-                        <div class="form-group" >
+                        <div class="form-group">
                            <label>Department</label>
-                           <select class="form-control">
+                           <select class="form-control" name='course_id'>
                               <option>Select Department</option>
-                              <option>ECE</option>
-                              <option>EE</option>
-                              <option>CSE</option>
-                              <option>CSE and Ai</option>
-                              <option>Civil</option>
-                              <option>ME</option>
+                              {% for i in course %}
+                              <option value="{{i.id}}"> {{i.name}} </option>
+                              {% endfor %}
                            </select>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Semester</label>
-                           <select class="form-control">
+                           <select class="form-control" name='session_year_id'>
                               <option>Select Semester</option>
-                              <option>1st Sem</option>
-                              <option>2nd Sem</option>
-                              <option>3rd Sem</option>
-                              <option>4th Sem</option>
-                              <option>5th Sem</option>
-                              <option>6th Sem</option>
-                              <option>7th Sem</option>
-                              <option>8th Sem</option>
+                              {% for i in session_year %}
+                              <option value="{{i.id}}"> {{i.semester}} </option>
+                              {% endfor %}
                            </select>
                         </div>
                      </div>
-                     {% comment %} <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Session</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div> {% endcomment %}
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                            <label>Gender</label>
-                           <select class="form-control">
+                           <select class="form-control" name='gender'>
                               <option>Select Gender</option>
-                              <option>Female</option>
-                              <option>Male</option>
-                              <option>Others</option>
+                              <option value='/Female'>Female</option>
+                              <option value='/Male'>Male</option>
+                              <option value='/Other'>Others</option>
                            </select>
                         </div>
                      </div>
@@ -108,59 +137,20 @@
                         <div class="form-group">
                            <label>Date of Birth</label>
                            <div>
-                              <input type="date" class="form-control">
+                              <input type="date" class="form-control" name='dob'>
                            </div>
                         </div>
                      </div>
-                     {% comment %} <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Admission Number</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div> {% endcomment %}
                      <div class="col-12 col-sm-6">
                         <div class="form-group">
-                           <label>Student Image</label>
-                           <input type="file" class="form-control">
-                        </div>
-                     </div>
-                     <div class="col-12">
-                        <h5 class="form-title"><span>Parent Information</span></h5>
-                     </div>
-                     <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Father's Name</label>
-                           <input type="text" class="form-control">
+                           <label>Password</label>
+                           <input type="text" class="form-control" placeholder='Password..' name='password'>
                         </div>
                      </div>
                      <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Father's Occupation</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
-                     <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Father's Mobile</label>
-                           <input type="text" class="form-control">
-                        </div>
-                     </div>
-                     <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Father's Email</label>
-                           <input type="email" class="form-control">
-                        </div>
-                     </div>
-                     <div class="col-12 col-sm-6">
-                        <div class="form-group">
+                        <div class="form-group" >
                            <label>Present Address</label>
-                           <textarea class="form-control"></textarea>
-                        </div>
-                     </div>
-                     <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                           <label>Permanent Address</label>
-                           <textarea class="form-control"></textarea>
+                           <textarea class="form-control" name='address'></textarea>
                         </div>
                      </div>
                      <div class="col-12">
