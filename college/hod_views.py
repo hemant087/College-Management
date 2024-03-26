@@ -97,15 +97,151 @@ def VIEW_STUDENT(request):
     return render(request, 'Hod/view_students.html', context)
 
 
+@login_required(login_url='/')
 def EDIT_STUDENT(request, id):
     student = Student.objects.filter(id=id)
-    course_obj = Course.objects.all()
+    course = Course.objects.all()
     session_year = Session_Year.objects.all()
 
     context = {
         'student': student,
-        'course': course_obj,
-        'session_year': session_year
-
+        'course': course,
+        'session_year': session_year,
     }
     return render(request, 'Hod/edit_student.html', context)
+
+
+@login_required(login_url='/')
+def UPDATE_STUDENT(request):
+    if request.method == "POST":
+        student_id = request.POST.get('student_id')
+        print(student_id)
+        username = request.POST.get('username')
+        profile_pic = request.FILES.get('profile_pic')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        mobile_number = request.POST.get('mobile_number')
+        registration = request.POST.get('registration')
+        roll = request.POST.get('roll')
+        course_id = request.POST.get('course_id')
+        session_year_id = request.POST.get('session_year_id')
+        gender = request.POST.get('gender')
+        dob = request.POST.get('dob')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+
+        user = CustomUser.objects.get(id=student_id)
+
+        user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+
+        if password != 'None' and password != "":
+            user.set_password(password)
+        if password != 'None' and password != "":
+            user.profile_pic = profile_pic
+        user.save()
+
+        student = Student.objects.get(admin=student_id)
+        student.address = address
+        student.gender = gender
+
+        course = Course.objects.get(id=course_id)
+        student.course_id = course
+
+        session_year = Session_Year.objects.get(id=session_year_id)
+        student.session_year_id = session_year
+
+        student.save()
+        messages.success(request, 'Record has been successfully updated!')
+        return redirect('view_student')
+
+    return render(request, 'Hod/edit_student.html')
+
+
+def DELETE_STUDENT(request, admin):
+    student = CustomUser.objects.get(id=admin)
+    student.delete()
+    messages.success(request, "Record has been successfully deleted")
+    return redirect('view_student')
+
+
+def ADD_DEPARTMENT(request):
+    if request.method == "POST":
+        dept_name = request.POST.get('dept_name')
+        dept_id = request.POST.get('dept_id')
+        dept_hod = request.POST.get('dept_hod')
+        start_date = request.POST.get('start_date')
+        num_student = request.POST.get('num_student')
+
+        # Validate the form data (e.g., check if required fields are not empty)
+
+        if Course.objects.filter(dept_name=dept_name).exists():
+            messages.warning(request, 'Department already exists!')
+        else:
+            # Create a new department object and save it to the database
+            dept = Course(
+                dept_name=dept_name,
+                dept_id=dept_id,
+                dept_hod=dept_hod,
+                start_date=start_date,
+                num_student=num_student
+            )
+            dept.save()
+            messages.success(
+                request, f'{dept.dept_name} has been successfully added!')
+        # return render(request, 'Hod/add_department.html')
+        return redirect('add_department')
+    return render(request, 'Hod/add_department.html')
+
+
+def VIEW_DEPARTMENT(request):
+    department = Course.objects.all()
+
+    context = {
+        'department': department,
+    }
+
+    return render(request, 'Hod/view_department.html', context)
+
+def EDIT_DEPARTMENT(request, id):
+    course = Course.objects.filter(id=id)
+
+    context = {
+        'course': course,
+    }
+    return render(request, 'Hod/edit_department.html', context)
+
+
+def UPDATE_DEPARTMENT(request):
+    if request.method == "POST":
+        id = request.POST.get('id')
+        dept_name = request.POST.get('dept_name')
+        dept_id = request.POST.get('dept_id')
+        dept_hod = request.POST.get('dept_hod')
+        start_date = request.POST.get('start_date')
+        num_student = request.POST.get('num_student')
+        print(id,dept_hod)
+
+        # Retrieve the Course object based on dept_id
+        course = Course.objects.get(id=id)
+
+        # Update the department details
+        course.dept_id = dept_id
+        course.dept_name = dept_name
+        course.dept_hod = dept_hod
+        # course.start_date = start_date
+        course.num_student = num_student
+
+        # Save the changes
+        course.save()
+
+        # Add a success message
+        messages.success(request, 'Record has been successfully updated!')
+
+        # Redirect to a different URL after successful submission
+        return redirect('view_department')
+
+    return render(request, 'Hod/edit_department.html')

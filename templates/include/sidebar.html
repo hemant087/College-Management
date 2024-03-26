@@ -23,7 +23,7 @@
                             class="menu-arrow"></span></a>
                     <ul>
                         <li><a href={% url "view_student" %}>Student List</a></li>
-                        <li><a href="student-details.html">Student View</a></li>
+                        {% comment %} <li><a href="#">Student View</a></li> {% endcomment %}
                         <li><a href={% url "add_student" %} >Add Student</a></li>
                         {% comment %} <li><a href="edit-student.html">Student Edit</a></li> {% endcomment %}
                     </ul>
@@ -42,9 +42,9 @@
                     <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="departments.html">Department List</a></li>
-                        <li><a href="add-department.html">Department Add</a></li>
-                        <li><a href="edit-department.html">Department Edit</a></li>
+                        <li><a href={% url "view_department" %}>Department List</a></li>
+                        <li><a href={% url "add_department" %}>Department Add</a></li>
+                        {% comment %} <li><a href="edit-department.html">Department Edit</a></li> {% endcomment %}
                     </ul>
                 </li>
                 <li class="submenu">

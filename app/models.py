@@ -15,14 +15,18 @@ class CustomUser(AbstractUser):
     profile_pic = models.ImageField(
         upload_to='media/profile_pic', null=True, blank=True)
 
-
 class Course(models.Model):
-    name = models.CharField(max_length=100)
+    dept_name = models.CharField(max_length=100, unique=True)
+    dept_id = models.CharField(max_length=15, unique=True, null=True)
+    dept_hod = models.CharField(max_length=100, default="")
+    start_date = models.DateField(null=True)
+    num_student = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self) -> str:
-        return self.name
+    def __str__(self):
+        return self.dept_name
+
 
 
 class Session_Year(models.Model):
@@ -36,9 +40,9 @@ class Session_Year(models.Model):
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     address = models.TextField()
-    registration = models.CharField(max_length=20, unique=True, null=True)
+    registration = models.IntegerField(max_length=20, unique=True, null=True)
     mobile_number = models.CharField(max_length=20, null=True)
-    roll = models.CharField(max_length=20, null=True)
+    roll = models.IntegerField(max_length=20, null=True)
     gender = models.CharField(max_length=100)
     dob = models.DateField(null=True)
     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)

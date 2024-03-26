@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content container-fluid">
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Edit Department</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="departments.html">Department</a></li>
+                    <li class="breadcrumb-item active">Edit Department</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method='POST' action="{% url 'update_department' %}">
+                        {% csrf_token %}
+                        {% include 'include/message.html' %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="form-title"><span>Department Details</span></h5>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Department ID</label>
+                                    <input type="text" class="form-control" name='dept_id'
+                                        value="{% for i in course  %}{{i.dept_id}}{% endfor %}">
+                                    <input type="text" class="form-control" name="id"
+                                        value="{% for i in course %}{{i.id}}{% endfor %}"hidden>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Department Name</label>
+                                    <input type="text" class="form-control" name='dept_name'
+                                        value="{% for i in course  %}{{i.dept_name}}{% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Head of Department</label>
+                                    <input type="text" class="form-control" name='dept_hod'
+                                        value="{% for i in course  %}{{i.dept_hod}}{% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Department Start Date</label>
+                                    <input type="date" class="form-control" name='start_date'
+                                        value="{% for i in course  %}{{i.start_date}}{% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>No of Students</label>
+                                    <input type="text" class="form-control" name='num_student'
+                                        value="{% for i in course  %}{{i.num_student}}{% endfor %}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
