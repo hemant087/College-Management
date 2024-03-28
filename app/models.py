@@ -7,13 +7,14 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     USER = (
         (1, 'HOD'),
-        (2, 'STAFF'),
+        (2, 'TEACHER'),
         (3, 'STUDENT')
     )
 
     user_type = models.CharField(choices=USER, max_length=50, default=1)
     profile_pic = models.ImageField(
         upload_to='media/profile_pic', null=True, blank=True)
+
 
 class Course(models.Model):
     dept_name = models.CharField(max_length=100, unique=True)
@@ -28,10 +29,8 @@ class Course(models.Model):
         return self.dept_name
 
 
-
 class Session_Year(models.Model):
     semester = models.CharField(max_length=100)
-    # Session_end = models.CharField(max_length=100)
 
     def __str__(self) -> str:
         return self.semester
@@ -40,13 +39,26 @@ class Session_Year(models.Model):
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     address = models.TextField()
-    registration = models.IntegerField(max_length=20, unique=True, null=True)
+    registration = models.IntegerField(unique=True, null=True)
     mobile_number = models.CharField(max_length=20, null=True)
-    roll = models.IntegerField(max_length=20, null=True)
+    roll = models.IntegerField(null=True)
     gender = models.CharField(max_length=100)
     dob = models.DateField(null=True)
     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
     session_year = models.ForeignKey(Session_Year, on_delete=models.DO_NOTHING)
+
+    def __str__(self) -> str:
+        return f"{self.admin.first_name} {self.admin.last_name}"
+
+
+class Teacher(models.Model):
+    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    mobile_number = models.CharField(max_length=20, null=True)
+    gender = models.CharField(max_length=100)
+    Qualification = models.TextField(default='', null=True)
+    address = models.TextField()
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=30)
 
     def __str__(self) -> str:
         return f"{self.admin.first_name} {self.admin.last_name}"

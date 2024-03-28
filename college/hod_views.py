@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from app.models import Course, Session_Year, Student
+from app.models import Course, Session_Year, Student, Teacher
 from app.models import CustomUser
 from django.db import IntegrityError
 
@@ -206,6 +206,7 @@ def VIEW_DEPARTMENT(request):
 
     return render(request, 'Hod/view_department.html', context)
 
+
 def EDIT_DEPARTMENT(request, id):
     course = Course.objects.filter(id=id)
 
@@ -223,7 +224,7 @@ def UPDATE_DEPARTMENT(request):
         dept_hod = request.POST.get('dept_hod')
         start_date = request.POST.get('start_date')
         num_student = request.POST.get('num_student')
-        print(id,dept_hod)
+        print(id, dept_hod)
 
         # Retrieve the Course object based on dept_id
         course = Course.objects.get(id=id)
@@ -232,7 +233,6 @@ def UPDATE_DEPARTMENT(request):
         course.dept_id = dept_id
         course.dept_name = dept_name
         course.dept_hod = dept_hod
-        # course.start_date = start_date
         course.num_student = num_student
 
         # Save the changes
@@ -245,3 +245,120 @@ def UPDATE_DEPARTMENT(request):
         return redirect('view_department')
 
     return render(request, 'Hod/edit_department.html')
+
+
+def DELETE_DEPARTMENT(request, id):
+    dept = Course.objects.get(id=id)
+    dept.delete()
+    messages.success(request, "Department has been successfully deleted")
+    return redirect('view_department')
+
+
+# ----------------------TEACHER---------------------------
+
+
+@login_required(login_url='/')
+def ADD_TEACHER(request):
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        mobile_number = request.POST.get('mobile_number')
+        gender = request.POST.get('gender')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+        Qualification = request.POST.get('Qualification')
+
+        if CustomUser.objects.filter(email=email).exists():
+            messages.warning(request, 'Email already exists!')
+            return redirect('add_teacher')
+        if CustomUser.objects.filter(username=username).exists():
+            messages.warning(request, 'Username already exists!')
+            return redirect('add_teacher')
+        else:
+            user = CustomUser(
+                first_name=first_name,
+                last_name=last_name,
+                username=username,
+                email=email,
+                user_type=2
+            )
+            user.set_password(password)
+            user.save()
+
+        # Create teacher object
+        teacher = Teacher(
+            admin=user,
+            address=address,
+            gender=gender,
+            mobile_number=mobile_number,
+            Qualification=Qualification,
+        )
+        teacher.save()
+
+        messages.success(
+            request, f'{user.first_name} {user.last_name} has been successfully added!')
+        return redirect('add_teacher')
+    return render(request, 'Teacher/add_teacher.html')
+
+
+def VIEW_TEACHER(request):
+    teacher = Teacher.objects.all()
+    context = {
+        'teacher': teacher,
+    }
+    return render(request, 'Teacher/view_teacher.html', context)
+
+
+@login_required(login_url='/')
+def EDIT_TEACHER(request):
+    teacher = Teacher.objects.all()
+    context = {
+        'teacher': teacher,
+    }
+    return render(request, 'Teacher/edit_teacher.html',context)
+
+
+@login_required(login_url='/')
+def UPDATE_TEACHER(request):
+    if request.method == "POST":
+        teacher_id = request.POST.get('teacher_id')
+        username = request.POST.get('username')
+        # profile_pic = request.FILES.get('profile_pic')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        mobile_number = request.POST.get('mobile_number')
+        gender = request.POST.get('gender')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+        city = request.POST.get('address')
+        state = request.POST.get('address')
+
+        user = CustomUser.objects.get(id=teacher_id)
+
+        user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+
+        if password != 'None' and password != "":
+            user.set_password(password)
+        # if password != 'None' and password != "":
+        #     user.profile_pic = profile_pic
+        user.save()
+
+        teacher = Student.objects.get(admin=teacher_id)
+        teacher.address = address
+        teacher.gender = gender
+        teacher.save()
+
+        messages.success(request, 'Record has been successfully updated!')
+        return redirect('view_teacher')
+    return render(request, 'Teacher/edit_teacher.html')
+
+
+def DELETE_TEACHER(request):
+    return render(request, 'Teacher/view_teacher.html')

@@ -29,13 +29,12 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Staff</span> <span
+                    <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Teacher</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="teachers.html">Staff List</a></li>
-                        <li><a href="teacher-details.html">Staff View</a></li>
-                        <li><a href="add-teacher.html">Staff Add</a></li>
-                        <li><a href="edit-teacher.html">Staff Edit</a></li>
+                        <li><a href={% url "view_teacher" %}>Teacher List</a></li>
+                        <li><a href={% url "add_teacher" %}>Teacher Add</a></li>
+                        <li><a href={% url "edit_teacher" %}>Teacher Edit</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
@@ -87,7 +86,7 @@
                     <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
                 </li>
                 <li>
-                    <a href="fees.html"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
+                    <a href={% url "attendance" %}><i class="fas fa-comment-dollar"></i> <span>Attendance</span></a>
                 </li>
                 <li>
                     <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>
