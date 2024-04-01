@@ -85,8 +85,14 @@
                 <li>
                     <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
                 </li>
-                <li>
-                    <a href={% url "attendance" %}><i class="fas fa-comment-dollar"></i> <span>Attendance</span></a>
+                <li class="submenu">
+                    <a href="#"><i class="fas fa-book-reader"></i> <span> Attendance</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href={% url "attendance" %}>Attendance</a></li>
+                        <li><a href={% url "attendance_sheet" %}>Attendance Sheet</a></li>
+                        <li><a href={% url "register_face" %}>Register Face</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="exam.html"><i class="fas fa-clipboard-list"></i> <span>Exam list</span></a>

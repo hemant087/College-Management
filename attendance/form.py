@@ -1,6 +1,7 @@
 from django import forms
 from .models import FaceRegistration
 
+
 class FaceRegistrationForm(forms.ModelForm):
     class Meta:
         model = FaceRegistration

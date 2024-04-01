@@ -3,8 +3,9 @@ from app.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from app.models import CustomUser,Attendance
+from app.models import CustomUser
 from datetime import datetime
+from attendance.models import FaceRegistration
 
 
 def BASE(request):
@@ -74,17 +75,19 @@ def PROFILE_UPDATE(request):
             messages.error(request, 'Failed to Update your Profile')
     return render(request, "profile.html")
 
-def ATTENDANCE(request):
-    if request.method == 'POST':
-        selected_date = request.POST.get('selected_date')
-        selected_date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
-        formatted_date = selected_date_obj.strftime('%Y-%m-%d')
+# def ATTENDANCE(request):
+#     if request.method == 'POST':
+#         selected_date = request.POST.get('selected_date')
+#         selected_date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
+#         formatted_date = selected_date_obj.strftime('%Y-%m-%d')
 
-        attendance_data = Attendance.objects.filter(date=formatted_date).values_list('name', 'time')
+#         attendance_data = FaceRegistration.objects.filter(date=formatted_date).values_list('name', 'time')
 
-        if not attendance_data:
-            return render(request, 'Attendance.html', {'selected_date': selected_date, 'no_data': True})
+#         if not attendance_data:
+#             return render(request, 'Attendance/attendance.html', {'selected_date': selected_date, 'no_data': True})
         
-        return render(request, 'Attendance.html', {'selected_date': selected_date, 'attendance_data': attendance_data})
+#         return render(request, 'Attendance/attendance.html', {'selected_date': selected_date, 'attendance_data': attendance_data})
 
-    return render(request, 'Attendance.html', {'selected_date': '', 'no_data': False})
+#     return render(request, 'Attendance/attendance.html', {'selected_date': '', 'no_data': False})
+# def ATTENDANCE_SHEET(request):
+#     return render(request,'Attendance/attendances.html')

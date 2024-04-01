@@ -1,17 +1,19 @@
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from . import teacher_views, views, hod_views, student_views
+from . import teacher_views, views, hod_views, student_views, attendance_views
 
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('base/', views.BASE, name='base'),
-#     Attendance
-    path('attendance', views.ATTENDANCE, name='attendance'),
-    path('attendance/', include('attendance.urls')),
+    #     Attendance
+    path('attendance', attendance_views.ATTENDANCE, name='attendance'),
+    path('attendance_sheet', attendance_views.ATTENDANCE_SHEET,
+         name='attendance_sheet'),
+    path('register_face', attendance_views.register_face, name='register_face'),
 
     # login path
     path('', views.LOGIN, name='login'),
@@ -45,7 +47,14 @@ urlpatterns = [
     path('Hod/Teacher/View', hod_views.VIEW_TEACHER, name='view_teacher'),
     path('Hod/Teacher/Edit', hod_views.EDIT_TEACHER, name='edit_teacher'),
     path('Hod/Teacher/Update', hod_views.UPDATE_TEACHER, name='update_teacher'),
-    path('Hod/Teacher/Delete/<str:admin>',hod_views.DELETE_TEACHER, name='delete_student'),
+    path('Hod/Teacher/Delete/<str:admin>',
+         hod_views.DELETE_TEACHER, name='delete_student'),
+
+
+
+
+    path('register/', attendance_views.register_face, name='register_face'),
+
 
 
 

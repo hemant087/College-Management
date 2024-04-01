@@ -11,9 +11,9 @@ class CustomUser(AbstractUser):
         (3, 'STUDENT')
     )
 
-    user_type = models.CharField(choices=USER, max_length=50, default=1)
-    profile_pic = models.ImageField(
-        upload_to='media/profile_pic', null=True, blank=True)
+    user_type = models.CharField(choices=USER, max_length=7, default=1)
+    profile_pic = models.ImageField(upload_to='media/profile_pic', null=True, blank=True)
+
 
 
 class Course(models.Model):
