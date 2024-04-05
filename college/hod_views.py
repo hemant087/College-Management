@@ -318,7 +318,7 @@ def EDIT_TEACHER(request):
     context = {
         'teacher': teacher,
     }
-    return render(request, 'Teacher/edit_teacher.html',context)
+    return render(request, 'Teacher/edit_teacher.html', context)
 
 
 @login_required(login_url='/')
@@ -360,5 +360,9 @@ def UPDATE_TEACHER(request):
     return render(request, 'Teacher/edit_teacher.html')
 
 
-def DELETE_TEACHER(request):
-    return render(request, 'Teacher/view_teacher.html')
+def DELETE_TEACHER(request, admin):
+    teacher = CustomUser.objects.get(id=admin)
+    teacher.delete()
+    messages.success(request, "Record has been successfully deleted")
+    return redirect('delete_teacher')
+    # return render(request, 'Teacher/view_teacher.html')
